@@ -1,0 +1,101 @@
+﻿@page
+@model GroupProject.Pages.Admin.ManageProductsModel
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="page-header">
+            <p class="pageheader-text"></p>
+            <div class="page-breadcrumb">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Index" class="breadcrumb-link">Home</a></li>
+                        <li class="breadcrumb-item"><a class="breadcrumb-link">Manage Products</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="text-center mb-5 mt-5">Manage Products</h2>
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col">
+            <a class="btn btn-primary btn-md" href="/Admin/AddProducts">New Product</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table id="productsTable" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Stock Qty</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.products)
+                    {
+                        var modalId = $"deleteModal_";
+                        <tr>
+                            <td>@product.productId</td>
+                            <td>@product.Name</td>
+                            <td>@product.Brand</td>
+                            <td>@product.Category</td>
+                            <td>@product.Description</td>
+                            <td>@product.Price.ToString("C")</td>
+                            <td>@product.StockQty</td>
+                            <td>
+                                <a class="btn btn-success btn-sm" href="/Admin/EditProduct?ID=@product.productId">Edit</a>
+                                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#@modalId">Delete</button>
+                            </td>
+                        </tr>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="@modalId" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel">Delete Product</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><strong>Are you sure you want to delete '@product.Name'?</strong></p>
+                                        <p>This action cannot be undone.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <a role="button" class="btn btn-danger" href="/Admin/DeleteProduct?ID=@product.productId">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- jQuery and DataTables -->
+<script>
+    $(document).ready(function () {
+        $('#productsTable').DataTable({
+            "pageLength": 10
+        });
+    });
+</script>
+
+

@@ -1,0 +1,108 @@
+﻿@page
+@model GroupProject.Pages.Reports.ReportdataModel
+@{
+    Layout = "_AdminLayout";
+}
+
+
+
+<div class="container-fluid dashboard-content">
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="page-header">
+                <p class="pageheader-text"></p>
+                <div class="page-breadcrumb">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/Admin/Reports" class="breadcrumb-link">Reports</a></li>
+                            <li class="breadcrumb-item"><a class="breadcrumb-link">Report Details</a></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- ============================================================== -->
+        <!-- basic table  -->
+        <!-- ============================================================== -->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+                
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="datatable" class="table table-striped table-bordered first">
+
+                            <!--Show table heads based on the Type of data to report-->
+                            @if (Model.soldProds != null)
+                            {
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Brand</th>
+                                        <th>Stock Quantity</th>
+                                    </tr>
+                                </thead>
+
+                                @foreach (var prod in Model.soldProds)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td>@prod.productId</td>
+                                            <td>@prod.Name</td>
+                                            <td>@prod.Price</td>
+                                            <td>@prod.Brand</td>
+                                            <td>@prod.StockQty</td>
+                                        </tr>
+                                    </tbody>
+
+                                    
+
+                                }
+
+
+                            }
+                            else if (Model.newCusts != null)
+                            {
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Join Date</th>
+
+                                    </tr>
+                                </thead>
+
+                                @foreach (var cust in Model.newCusts)
+                                {
+                                    <tbody>
+                                        <tr>
+                                            <td>@cust.FirstName</td>
+                                            <td>@cust.LastName</td>
+                                            <td>@cust.Email</td>
+                                            <td>@cust.Phone</td>
+                                            <td>@cust.RegistrationDate.ToString("d")</td>
+                                        </tr>
+
+                                    </tbody>
+                                 
+                                }
+
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- end basic table  -->
+        <!-- ============================================================== -->
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@page
+@model InvoiceModel
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Invoice";
+}
+
+<div class="container my-5">
+    <div class="card">
+        <div class="card-header">
+            Invoice #@Model.Invoice.invoiceId
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Thank you for your purchase, @Model.user.FirstName!</h5>
+            <p class="card-text">Order ID: @Model.Order.orderId</p>
+            <p class="card-text">Order Date: @Model.Order.Date.ToString("MM/dd/yyyy")</p>
+            <p class="card-text">Total Amount: $@Model.Order.OrderTotal</p>
+            <h5 class="mt-4">Order Details:</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th class="text-right">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.PurchasedProducts)
+                    {
+                        //get the product matching the purchased product id
+                        var product = Model.Products.FirstOrDefault(p => p.productId == item.productId);
+
+                        if (product != null)
+                        {
+                            var price = product.onSale && product.SalePrice.HasValue ? product.SalePrice.Value : product.Price;
+                            <tr>
+                                <td>@product.Name</td>
+                                <td>@item.Qty</td>
+                                <td class="text-right">$@price</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <a href="/Index" class="btn btn-primary"><i class="fa-arrow-left mr-1"></i>Continue Shopping</a>
+            
+            <a href="/Account/Invoices/PreviousInvoices" class="btn btn-secondary"><i class="fa-arrow-left mr-1"></i>Previous Invoices</a>
+        </div>
+    </div>
+</div>

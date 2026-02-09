@@ -1,0 +1,99 @@
+﻿@page
+@model ProductModel
+@{ 
+    Layout = Model.Layout; 
+ }
+
+
+<!--USED RAZOR SYNTAX TO SIMPLYFY PROCESS OF DYNAMICALLY POPULATING PRODUCTS-->
+
+<nav aria-label="breadcrumb" class="mt-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Index">Home</a></li> <!--REDIRECT TO HOME-->
+        <li class="breadcrumb-item active" aria-current="page"><a href="/CategoryProducts/CategoryProducts">@Model.Product.Category</a></li> <!--REDIRECT TO CATEGORY-->
+        <li class="breadcrumb-item active" aria-current="page">@Model.Product.Name</li>
+    </ol>
+</nav>
+
+
+<div class="container my-5">
+    <div class="row">
+
+        <!-- Product Image -->
+        <div class="col-md-6">
+            <img src="@Model.Product.ImageUrl" class="img-fluid" alt="@Model.Product.Name">
+        </div>
+
+        <!-- Product Details -->
+        <div class="col-md-6">
+            <h2>@Model.Product.Name</h2>
+            <p class="text-muted m-0">Brand: @Model.Product.Brand</p>
+
+            <h4>
+                @if (Model.Product.onSale && Model.Product.SalePrice.HasValue)
+                {
+                    <span class="text-danger">$@Model.Product.SalePrice</span>
+                    <span class="text-muted"><s>$@Model.Product.Price</s></span> }
+                 else{
+                    <span>$@Model.Product.Price</span>
+                }
+
+            </h4>
+                @if (Model.Product.Price > 100)
+                 {
+                     <p class="text-success ml-0"><i class="fa fa-truck"></i> Eligible for Free Shipping</p>
+                } else
+                {
+                    
+                        var remainder = 100 - Model.Product.Price;
+                    
+                     <p class="text-warning ml-0"><i class="fa fa-truck"></i> Add extra <span class="text-success">$@remainder</span> for Free Shipping</p>
+                        }
+                     <p class="ml-0">@Model.Product.Description</p>
+
+                     <form method="post">
+                         <div class="form-group">
+                             <label for="quantity">Quantity:</label>
+
+                             <div class="row">
+                                 <div class="col-3">
+                                     <input type="number" name="quantity" class="form-control" id="quantity" value="1" min="1">
+                                 </div>
+
+                                 <div class="col">
+                                     <div class="col pl-0 pr-1">
+                                         <button type="submit" class="btn btn-primary btn-block">Add to Cart</button>   <!--ADD TO CART BUTTON-->
+                                     </div>
+                                 </div>
+                             </div>
+
+
+                         </div>
+                         <input type="hidden" name="productId" value="@Model.Product.productId" />
+
+
+
+                         <button type="submit" class="btn btn-outline-info w-100">
+                             <!--ADD TO WISHLIST BUTTON-->
+                             Add To Wishlist
+                         </button>
+
+                         <button type="submit" class="btn btn-outline-info w-100 mt-2 mb-2">
+                             <!--ADD TO compare BUTTON-->
+                             <i class="fa fa-exchange"></i>
+                         </button>
+
+                          <!-- SHOW EDIT PRODUCT ICON IF USER IS AN ADMIN-->
+                            @if (Model.userType!=null && Model.userType.Equals("admin"))
+                            {
+                                <a role="button" href="/Admin/EditProduct?id=@Model.Product.productId" class="edit-icon w-100 btn btn-outline-info">
+                                    <i class="fa fa-pencil d-block"></i>
+                                </a>
+                            }
+
+
+
+                     </form>
+        </div>
+    </div>
+</div>

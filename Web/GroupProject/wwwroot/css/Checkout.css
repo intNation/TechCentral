@@ -1,0 +1,44 @@
+﻿.information-wrapper input,
+.information-wrapper select {
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding: 13px 10px;
+    margin-bottom: 20px;
+    outline: none;
+    border: none;
+    border-bottom: 1px solid #F45C5D;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.31);
+}
+
+.resp-tabs-list {
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+    .resp-tabs-list li {
+        padding: 10px 20px;
+        background-color: #F45C5D;
+        color: #fff;
+        border-radius: 5px;
+    }
+
+        .resp-tabs-list li.active {
+            background-color: #143A51;
+        }
+
+.tab-content {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.tab-content {
+    display: none;
+}
+
+    .tab-content.active {
+        display: block;
+    }

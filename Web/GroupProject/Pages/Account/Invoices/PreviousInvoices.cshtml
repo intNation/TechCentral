@@ -1,0 +1,42 @@
+﻿@page
+@model GroupProject.Pages.Account.Invoices.PreviousInvoicesModel
+@{
+    Layout = "_AdminLayout";
+}
+<div class="container my-5">
+    <h2 class="text-center mb-4">Your Previous Invoices</h2>
+
+    @if (Model.Invoices != null && Model.Invoices.Any())
+    {
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Date</th>
+                    <th class="text-right">Total Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var invoice in Model.Invoices)
+                {
+                    <tr>
+                        <td>@invoice.invoiceId</td>
+                        <td>@invoice.Date.ToString("MM/dd/yyyy")</td>
+                        <td class="text-right">$@invoice.Total</td>
+                        <td>@(invoice.Status ? "Paid" : "Unpaid")</td>
+                        <td>
+                            <a href="/Account/Invoices/Invoice?id=@invoice.invoiceId" class="btn btn-primary btn-sm">View</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>You have no previous invoices.</p>
+    }
+</div>

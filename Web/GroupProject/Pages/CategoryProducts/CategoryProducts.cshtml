@@ -1,0 +1,127 @@
+﻿@page "/category/{category}"
+@model CategoryProductsModel
+@{
+    Layout = Model.Layout;
+}
+
+<nav aria-label="breadcrumb" class="mt-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Index">Home</a></li> <!--REDIRECT TO HOME-->
+        <li class="breadcrumb-item active" aria-current="page">@Model.Category</li>
+    </ol>
+</nav>
+
+
+<section class="py-5">
+    <div class="container">
+        <h1 class="text-center mb-4 text-capitalize">Featured Products</h1>
+        <div class="row">
+            @foreach (var product in Model.Products)
+            {
+                var discountPercentage = product.onSale && product.SalePrice.HasValue
+                    ? (int)(((product.Price - product.SalePrice.Value) / product.Price) * 100)
+                    : 0;
+
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        @if (discountPercentage > 0)
+                        {
+                            <div class="badge badge-danger position-absolute" style="top: 10px; left: 10px;">
+                                @discountPercentage% OFF
+                            </div>
+                        }
+
+                        <a href="/Product/Product?id=@product.productId"><!---HREF TO PRODUCT Single Product USING URL Parameter -->
+                            <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" style="height: 330px; object-fit: cover;">
+                        </a>
+
+                         <!-- Add to Compare Icon Shown when hovering over-->
+                        <a href="/Compare/AddToCompare?productId=@product.productId" class="compare-icon">
+                            <i class="fa fa-exchange"></i>
+                        </a>
+
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@product.Name</h5>
+                            <p class="card-text">
+                                @if (product.onSale && product.SalePrice.HasValue)
+                                {
+                                    <span class="text-muted"><s>$@product.Price</s></span>
+                                    <span class="text-danger">$@product.SalePrice</span>
+                                }
+                                else
+                                {
+                                    <span>$@product.Price</span>
+                                }
+                            </p>
+                        </div>
+                        <div class="card-footer text-center">
+
+                            <form method="post">
+                                <input type="hidden" name="productId" value="@product.productId" />
+                                <input type="hidden" name="quantity" value="1" />
+                                  <div class="row">
+                                      <!-- SHOW EDIT PRODUCT ICON IF USER IS AN ADMIN-->
+                                    @if (Model.userType!=null && Model.userType.Equals("admin"))
+                                    {
+                                        <div class="col-1 p-0">
+                                            <a href="/Admin/EditProduct?id=@product.productId" class="edit-icon" style="font-size:x-large";>
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </div>
+                                    }
+                                    <div class="col-2 p-0">
+                                        <button type="submit" class="btn btn-outline-danger">
+                                            <!--ADD TO WISHLIST BUTTON-->
+                                            <i class="fa fa-heart"></i>
+                                        </button>
+                                    </div>
+
+                                    <div class="col pl-0 pr-1" >
+
+                                        <button type="submit" class="btn btn-primary btn-block">Add to Cart</button>   <!--ADD TO CART BUTTON-->
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+
+    .card {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .card-img-top {
+        transition: transform 0.6s ease;
+    }
+
+    .card:hover .card-img-top {
+        transform: scale(1.1);
+    }
+
+    .compare-icon {
+        display: none;
+        font-size: 2.0rem;
+        color: #000;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        transition: transform 0.5s ease;
+    }
+
+    .card:hover .compare-icon {
+        display: block;
+    }
+
+    .compare-icon:hover {
+        font-weight: bold;
+        color: #5cb85c;
+    }
+</style>

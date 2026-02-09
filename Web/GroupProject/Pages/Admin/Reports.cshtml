@@ -1,0 +1,161 @@
+﻿@page
+@model GroupProject.Pages.Admin.ReportsModel
+@{
+    Layout = "_AdminLayout";
+}
+
+
+ <div class="container-fluid dashboard-content">
+              
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="page-header">
+                            <h2 class="pageheader-title">Hello @Model.user.FirstName</h2>
+                            <p class="pageheader-text"></p>
+                            <div class="page-breadcrumb">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="/Index" class="breadcrumb-link">Home</a></li>     
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+			
+                <div class="row">
+
+
+                    <!-- ============================================================== -->
+                    <!-- Products Sold   -->
+                    <!-- ============================================================== -->
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <a href="/Reports/ReportData?data=soldproducts"> <!--USE URL PARAMETER TO GO TO REPORT DATA PAGE TO DISPLAY RELEVANT REPORT DATA-->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-inline-block">
+                                        <h5 class="text-muted">Products Sold</h5>
+                                        <h2 class="mb-0"> @Model.NumberOfProducts</h2>
+                                    </div>
+                                    <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
+                                        <i class="fa fa-eye fa-fw fa-sm text-info"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- Products Sold    -->
+                    <!-- ============================================================== -->
+
+
+                    <!-- ============================================================== -->
+                    <!-- new customers  -->
+                    <!-- ============================================================== -->
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <a href="/Reports/ReportData?data=newcustomers">   <!--USE URL PARAMETER TO GO TO REPORT DATA PAGE TO DISPLAY RELEVANT REPORT DATA-->
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-inline-block">
+                                        <h5 class="text-muted">New Customers Today</h5>
+                                        <h2 class="mb-0">@Model.RegisteredUsersToday</h2>
+                                    </div>
+                                    <div class="float-right icon-circle-medium  icon-box-lg  bg-primary-light mt-1">
+                                        <i class="fa fa-user fa-fw fa-sm text-primary"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            </a>
+                    </div>
+
+                    <!-- ============================================================== -->
+                    <!-- end new customers   -->
+                    <!-- ============================================================== -->
+
+                    <!-- ============================================================== -->
+                    <!-- New Orders   -->
+                    <!-- ============================================================== -->
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-inline-block">
+                                    <h5 class="text-muted">Orders Today</h5>
+                                    <h2 class="mb-0">@Model.NumberOfOrdersToday</h2>
+                                </div>
+                                <div class="float-right icon-circle-medium  icon-box-lg  bg-secondary-light mt-1">
+                                    <i class="fa fa-handshake fa-fw fa-sm text-secondary"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end new orders   -->
+                    <!-- ============================================================== -->
+
+                    <!-- ============================================================== -->
+                    <!-- total orders   -->
+                    <!-- ============================================================== -->
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-inline-block">
+                                    <h5 class="text-muted">Total Orders</h5>
+                                    <h2 class="mb-0">@Model.TotalOrders</h2>
+                                </div>
+                                <div class="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
+                                    <i class="fa fa-money-bill-alt fa-fw fa-sm text-brand"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end total orders   -->
+                    <!-- ============================================================== -->
+
+
+                    <!-- ============================================================== -->
+                    <!-- total revenue  -->
+                    <!-- ============================================================== -->
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="card border-3 border-top border-top-primary">
+                            <div class="card-body">
+                                <h5 class="text-muted">Total Revenue</h5>
+                                <div class="metric-value d-inline-block">
+                                    <h1 class="mb-1">$@Model.TotalRevenue.ToString()</h1>
+                                </div>
+                                <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                                    <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1">5.86%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end total revenue  -->
+                    <!-- ============================================================== -->
+
+                    <!-- ============================================================== -->
+                    <!-- averrage renenue per use-->
+                    <!-- ============================================================== -->
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="card border-3 border-top border-top-primary">
+                            <div class="card-body">
+                                <h5 class="text-muted">Revenue Per User</h5>
+                                <div class="metric-value d-inline-block">
+                                    <h1 class="mb-1">$@Model.avgRevenue.ToString("N2")</h1>
+                                </div>
+                                <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                                    <span class="icon-circle-small icon-box-xs text-success bg-success-light"><i class="fa fa-fw fa-arrow-up"></i></span><span class="ml-1">5.86%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- end revenue per user  -->
+                    <!-- ============================================================== -->
+
+                </div>
+
+     </div>
+
+                    

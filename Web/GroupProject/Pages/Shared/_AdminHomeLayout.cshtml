@@ -1,0 +1,236 @@
+﻿@inject ServiceReference1.WebServiceClient client
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <title>@ViewData["Title"] - Techcentral</title>
+
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <!--just added from template 2-->
+    <!-- Custom-Files -->
+    <link href="~/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Bootstrap css -->
+    <link href="~/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/css/fontawesome-all.css">
+    <!-- Font-Awesome-Icons-CSS -->
+    <link href="~/css/popuo-box.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- pop-up-box -->
+    <link href="~/css/menu.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- menu style -->
+    <!-- //Custom-Files -->
+    <!--just added from template 2-->
+    <!-- web fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"
+          rel="stylesheet">
+    <!-- //web fonts -->
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- style css -->
+    <link href="~/css/style.css" rel="stylesheet" />
+    <!-- Responsive-->
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="~/images/fevicon.png" type="image/gif" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="~/css/jquery.mCustomScrollbar.min.css">
+
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+
+    <!--icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <!-- owl stylesheets -->
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+    <!-- manager logged in view  start-->
+    <div class="header_section haeder_main">
+        <div class="container-fluid">
+            <nav class="navbar navbar-light bg-light justify-content-between">
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    <a href=" Home.aspx">Home</a>
+                    <a href="Computers.aspx">Computers</a>
+                    <a href="Contact.aspx">Contact</a>
+                </div>
+                <span style="font-size:30px;cursor:pointer; color: #fff;" onclick="openNav()"><img src="~/images/toggle-icon.png"></span>
+                <a class="navbar-brand" href="Home.aspx"> <span id="tech">TECH</span><span id="central">CENTRAL.com</span></a>
+                <form class="form-inline " runat="server">
+                    <div class="login_text">
+                        <ul>
+
+                            <li>
+                                <a href="#"><img src="~/images/search-icon.png"></a>
+                            </li>
+                            <li>
+                                <a href="/Cart/Cart"> <img src="~/images/trolly-icon.png"></a>
+                            </li>
+                            <li class="nav-item dropdown bg-success show ml-3" style="width:auto; font-size:12px; padding:2px; top:7px">
+                                <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="fa fa-user mr-2"></i> <span>Hello Admin</span>
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right bg-secondary">
+                                    <a class="dropdown-item" href="/Admin/ManageProducts">Manage Products</a>
+                                    <a class="dropdown-item" href="/Admin/Reports">Reports</a>
+                                    <a class="dropdown-item" href="/Account/Logout/Logout">Logout</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </form>
+            </nav>
+        </div>
+    </div>
+    <!-- manager logged in view end-->
+
+    <div class="catagary_section layout_padding">
+        <div class="container">
+            <div class="catagary_main">
+                <div class="catagary_right">
+                    <div class="catagary_menu">
+                        <ul>
+
+                            @foreach (var category in client.GetCategoriesAsync().Result)
+                            {
+                                <li><a href="/category/@category">@category</a></li>
+                            }
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- header section end -->
+
+
+
+
+    @RenderBody()
+
+
+
+    <!-- footer section start -->
+    <div class="footer_section layout_padding margin_top_90">
+        <div class="container">
+            <div class="footer_section_2">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <h4 class="adderss_text">Menu</h4>
+                        <div class="footer_menu">
+                            <ul>
+                                <li><a href="Home.aspx">Home</a></li>
+                                <li><a href="Laptops.aspx">Laptops</a></li>
+                                <li><a href="Desktops.aspx">Desktops</a></li>
+                                <li><a href="Accessories.aspx">Accessocies</a></li>
+                                <li><a href="Printers.aspx">Printers</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <h4 class="adderss_text">Useful Link</h4>
+                        <div class="footer_menu">
+                            <ul>
+                                <li><a href="#">Adipiscing</a></li>
+                                <li><a href="#">Elit, sed do</a></li>
+                                <li><a href="#">Eiusmod</a></li>
+                                <li><a href="#">Tempor</a></li>
+                                <li><a href="#">incididunt</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <h4 class="adderss_text">Contact</h4>
+                        <div class="call_text"><img src="~/images/map-icon.png"><span class="paddlin_left_0"><a href="#">South Africa 105 aukland park</a></span></div>
+                        <div class="call_text"><img src="~/images/call-icon.png"><span class="paddlin_left_0"><a href="#">+011 665 8899</a></span></div>
+                        <div class="call_text"><img src="~/images/mail-icon.png"><span class="paddlin_left_0"><a href="#">ecommerceevolvers.com</a></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer section end -->
+    <!-- copyright section start -->
+    <div class="copyright_section">
+        <div class="container">
+            <p class="copyright_text">2020 All Rights Reserved</p>
+        </div>
+
+        <div class="footer_logo_main">
+            <div class="social_icon">
+                <ul>
+                    <li><a href="#"><img src="~/images/fb-icon.png"></a></li>
+                    <li><a href="#"><img src="~/images/twitter-icon.png"></a></li>
+                    <li><a href="#"><img src="~/images/linkedin-icon.png"></a></li>
+                    <li><a href="#"><img src="~/images/instagram-icon.png"></a></li>
+                    <li><a href="#"><img src="~/images/youtub-icon.png"></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- copyright section end -->
+    <!-- Javascript files-->
+    <script src="~/js/bootstrap.js"></script>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~js/jquery-2.2.3.min.js"></script>
+    <script src="~/js/jquery-3.0.0.min.js"></script>
+    <!-- popup modal (for location)-->
+    <script src="~/js/jquery.magnific-popup.js"></script>
+    <script src="~/js/plugin.js"></script>
+    <!-- cart-js -->
+    <script src="~/js/minicart.js"></script>
+
+    <!-- sidebar -->
+    <script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/js/custom.js"></script>
+    <!-- javascript -->
+    <script src="~/js/owl.carousel.js"></script>
+    <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+
+
+</body>
+</html>

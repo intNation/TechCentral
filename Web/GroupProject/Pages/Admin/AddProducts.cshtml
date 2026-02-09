@@ -1,0 +1,120 @@
+﻿@page
+@model GroupProject.Pages.Admin.AddProductsModel
+@{
+    Layout = "_AdminLayout";
+}
+
+
+<div class="container-fluid">
+    <h2 class="text-center mb-5 mt-5">Add New Product</h2>
+    <div class="row">
+
+       
+        <div class="col-md-8 mx-auto mt-3" style="box-shadow:rgba(0,0,0,0.3) 1px 2px 3px 4px; border-radius:4px;">
+            @if (Model.error_msg.Length > 0)
+            {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>@Model.error_msg</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            else if (Model.success_msg.Length > 0)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>@Model.success_msg</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            <form method="post">
+
+                <div class="row mb-3 mt-5">
+                    <label class="col-sm-4 col-form-label">Name</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="@Model.product.Name" />
+                        <span class="text-danger" asp-validation-for="@Model.product.Name"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Brand</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="@Model.product.Brand" />
+                        <span class="text-danger" asp-validation-for="@Model.product.Brand"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Category</label>
+                    <div class="col-sm-8">
+                        <select class="form-control-sm" asp-for="@Model.product.Category">
+                            <option value="Desktops">Desktop</option>
+                            <option value="Laptops">Laptops</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Gaming">Gaming</option>
+                            <option value="Printers">Printers</option>
+                            <option value="Mobile">Mobile</option>
+                            <option value="Monitors">Monitors</option>
+                        </select>
+
+                    </div>
+                </div>
+
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Price</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="@Model.product.Price" />
+                        <span class="text-danger" asp-validation-for="@Model.product.Price"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">On Sale</label>
+                    <div class="col-sm-8">
+                        <select class="form-control-sm" asp-for="@Model.product.onSale">
+                            <option value="True">Yes</option>
+                            <option value="False">No</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Sale Price(Optional)</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="@Model.product.SalePrice" />
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Description</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" asp-for="@Model.product.Description"></textarea>
+                        <span class="text-danger" asp-validation-for="@Model.product.Description"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label class="col-sm-4 col-form-label">Image</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" asp-for="@Model.product.ImageUrl">
+                        <span class="text-danger" asp-validation-for="@Model.product.ImageUrl"></span>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="offset-sm-7 col-sm ">
+                        <button type="submit" class="btn btn-primary pl-5 pr-5">Save</button>
+                    </div>
+
+                    <div class="col-sm pl-5 pr-5">
+                        <a class="btn btn-outline-primary pl-5 pr-5" role="button" href="/Admin/ManageProducts">Discard</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
