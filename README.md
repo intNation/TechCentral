@@ -1,9 +1,13 @@
+
+
 # TechCentral
 
 TechCentral is a C# ASP.NET e-commerce web application for browsing, purchasing, and managing technology products.  
 The system includes customer shopping functionality, checkout and invoice generation, administrative product management, and reporting features.
 
 The project is structured using a web layer and a service layer, with a local SQL Server database.
+
+[![Demo Vedio](https://img.youtube.com/vi/i1VYn-4_zkc&t=196s/0.jpg)](https://www.youtube.com/watch?v=i1VYn-4_zkc&t=196s)
 
 ---
 
