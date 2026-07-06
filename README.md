@@ -7,7 +7,9 @@ The system includes customer shopping functionality, checkout and invoice genera
 
 The project is structured using a web layer and a service layer, with a local SQL Server database.
 
-[![TechCentral Demo](https://img.youtube.com/vi/i1VYn-4_zkc&t/maxresdefault.jpg)](https://www.youtube.com/watch?v=i1VYn-4_zkc&t)
+<a href="https://www.youtube.com/watch?v=i1VYn-4_zkc" target="_blank">
+  <img src="https://img.youtube.com/vi/i1VYn-4_zkc/maxresdefault.jpg" alt="Demo Video" width="400">
+</a>
 
 ---
 
