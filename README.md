@@ -9,6 +9,7 @@ The project is structured using a web layer and a service layer, with a local SQ
 
 <a href="https://www.youtube.com/watch?v=i1VYn-4_zkc" target="_blank">
   <img src="https://img.youtube.com/vi/i1VYn-4_zkc/maxresdefault.jpg" alt="Demo Video" width="1080">
+  <span>Techcentral Demo vedio</span>
 </a>
 
 ---
